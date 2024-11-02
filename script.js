@@ -16,7 +16,7 @@ function countWinnersList() {
     let nextWinnerInGroup = firstWinnerInGroup;
 
     for (let i = 1; i < winnersInListLeft; i ++) {
-         nextWinnerInGroup += 3;
+         nextWinnerInGroup += 7;
          winnersList.push(nextWinnerInGroup);
     }
 
