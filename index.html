@@ -12,52 +12,55 @@
 </head>
 <body>
     <div class="container">
-        <div class="text-center mt-3">
+        <div class="text-center mt-3 mb-5">
             <img src="images/main-logo.svg" class="img-fluid" alt="Логотип Aravia" width="215" height="70">
         </div>
         
         <h1 class="text-center visually-hidden">Розыгрыш призов Aravia</h1>
-        <form class="row gy-2 gx-3 align-items-center mb-5 mt-5">
-            <div class="col-xl-3 col-md-12">
+
+        <form class="row gy-2 gx-3 align-items-center mb-5 mt-5 visually-hidden">
+            <div class="col-xl-6 col-md-12">
                 <p class="text-center fs-4">
                     УЧАСТНИКИ
                 </p>
                 <label class="visually-hidden" for="autoSizingInput">Введите число</label>
-                <input id="participantsLeft" type="text" class="form-control" id="autoSizingInput" placeholder="Введите число" required>
-            </div>
-            <div class="col-xl-3 col-md-12">
-                <p class="text-center fs-4">
-                    ОСТАВШИЕСЯ ПРИЗЫ
-                </p>
-                <label class="visually-hidden" for="autoSizingInput">Введите число</label>
-                <input id="prizesLeft" type="text" class="form-control" id="autoSizingInput" placeholder="Введите число" required>
-            </div>
-            <div class="col-xl-3 col-md-12">
-                <p class="text-center fs-4">
-                    ЧИСЛО ПРИЗЁРОВ
-                </p>
-                <label class="visually-hidden" for="autoSizingInput">Введите число</label>
-                <input id="winnersInGroup" type="text" class="form-control" id="autoSizingInput" placeholder="Введите число" required>
-            </div>
-            <div class="col-xl-3 col-md-12">
-                <p class="text-center fs-4">
-                    ДРОБНАЯ ЧАСТЬ КУРСА
-                </p>
-                <label class="visually-hidden" for="autoSizingInput">Введите число</label>
-                <input id="coefficient" type="text" class="form-control" id="autoSizingInput" placeholder="Введите число" value="0.6394" required>
-            </div>
-            <div class="col-12 text-center mt-5">
-                <button id="countWinnersBtn" type="button" class="btn btn-lg result-button">Выбрать победителей</button>
+                <input id="participantsLeft" type="text" class="form-control" id="autoSizingInput" placeholder="Введите число" value="600" required>
             </div>
         </form>
+
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-center">КОЛИЧЕСТВО УЧАСТНИКОВ</h2>
+                <p id="participantsAmount" class="fs-1 text-center">
+                    600
+                </p>
+            </div>
     
-        <h2 class="text-center mb-5">НОМЕРА ПОБЕДИТЕЛЕЙ</h2>
+            <div class="col-6">
+                <h2 class="text-center">ОСТАЛОСЬ ПРИЗОВ</h2>
+                <p id="prizesLeft" class="fs-1 text-center">
+                    10
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 text-center mb-5">
+            <button id="countWinnersBtn" type="button" class="btn btn-lg result-button">Выбрать победителя</button>
+        </div>
+
+
+    
+        <h2 class="text-center mb-5 display-2">НОМЕР ПОБЕДИТЕЛЯ</h2>
         <p id="result" class="fs-1 text-center">
             
         </p>
+
+
+
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="test.js"></script>
 </body>
 </html>
