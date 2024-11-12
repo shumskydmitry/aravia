@@ -1,6 +1,6 @@
 let currentPrizeNumber = 1;
 let prizesLeft = 10;
-let currentParticipantsAmount = document.getElementById('participantsLeft').value;
+let currentParticipantsAmount = 600;
 
 
 function chooseWinner() {
@@ -14,8 +14,6 @@ function chooseWinner() {
     
     }
     
-    document.getElementById('participantsAmount').innerHTML = currentParticipantsAmount;
-    document.getElementById('prizesLeft').innerHTML = prizesLeft;
     document.getElementById('result').innerHTML = prizeDrawWinnerID;
     
 }
