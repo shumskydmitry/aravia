@@ -1,6 +1,7 @@
 let participants = [];
-let prizesLeft = 0;
-let currentPrizeNumber = 0;
+let prizesLeft = 0; // Текущее количество неразыгранных призов
+let currentPrizeNumber = 0; // Текущий номер приза
+let totalPrizes = 0; // Общее количество призов (Y)
 let isInitialized = false; // Флаг для проверки, начат ли розыгрыш
 
 document.getElementById('countWinnersBtn').addEventListener('click', handleClick);
@@ -14,17 +15,17 @@ function handleClick() {
 }
 
 function startDrawing() {
-    const totalParticipantsAmount = parseInt(document.getElementById("participants").value);
-    const totalPrizesAmount = parseInt(document.getElementById("prizes").value);
+    const totalParticipantsAmount = parseInt(document.getElementById("participants").value.trim());
+    totalPrizes = parseInt(document.getElementById("prizes").value.trim());
 
-    if (isNaN(totalParticipantsAmount) || isNaN(totalPrizesAmount) || totalParticipantsAmount <= 0 || totalPrizesAmount <= 0) {
+    if (isNaN(totalParticipantsAmount) || isNaN(totalPrizes) || totalParticipantsAmount <= 0 || totalPrizes <= 0) {
         document.getElementById("result").innerText = "Пожалуйста, введите корректные данные.";
         return;
     }
 
     participants = Array.from({ length: totalParticipantsAmount }, (_, i) => i + 1);
-    prizesLeft = totalPrizesAmount;
-    currentPrizeNumber = totalPrizesAmount;
+    prizesLeft = totalPrizes;
+    currentPrizeNumber = totalPrizes;
 
     isInitialized = true;
     document.getElementById("result").innerText = "Розыгрыш начат! Нажмите кнопку для выбора победителя.";
@@ -37,16 +38,22 @@ function drawWinner() {
         return;
     }
 
-    const rawN = (participants.length * currentPrizeNumber / prizesLeft) - prizesLeft;
+    const i = totalPrizes - prizesLeft; // Количество уже разыгранных призов
+    const rawN = (participants.length * currentPrizeNumber / totalPrizes) - i;
     const winnerIndex = Math.ceil(rawN) - 1;
-    const winner = participants.splice(winnerIndex, 1)[0];
 
+    // Убедимся, что индекс находится в пределах массива
+    const adjustedIndex = Math.max(0, Math.min(winnerIndex, participants.length - 1));
+    const winner = participants.splice(adjustedIndex, 1)[0];
+
+    // Обновление результата
     const resultDiv = document.getElementById("result");
     const currentResults = resultDiv.innerHTML;
     resultDiv.innerHTML = `${currentResults}<br>Победитель №${currentPrizeNumber}: Участник ${winner}`;
 
-    prizesLeft -= 1;
-    currentPrizeNumber -= 1;
+    // Обновляем оставшиеся призы
+    prizesLeft -= 1; // Уменьшаем количество оставшихся призов
+    currentPrizeNumber -= 1; // Уменьшаем текущий номер приза
 
     if (prizesLeft <= 0) {
         resultDiv.innerHTML += "<br><b>Призы закончились. Розыгрыш окончен.</b>";
