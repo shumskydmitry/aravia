@@ -1,6 +1,6 @@
 let participants = [];
 let prizesLeft = 0; // Текущее количество неразыгранных призов
-let currentPrizeNumber = 0; // Текущий номер приза
+let currentPrizeNumber = 1; // Текущий номер приза, начиная с 1
 let totalPrizes = 0; // Общее количество призов (Y)
 let isInitialized = false; // Флаг для проверки, начат ли розыгрыш
 
@@ -23,9 +23,8 @@ function startDrawing() {
         return;
     }
 
-    participants = Array.from({ length: totalParticipantsAmount }, (_, i) => i + 1);
+    participants = Array.from({ length: totalParticipantsAmount }, (_, i) => i + 1); // Генерация массива участников
     prizesLeft = totalPrizes;
-    currentPrizeNumber = totalPrizes;
 
     isInitialized = true;
     document.getElementById("result").innerText = "Розыгрыш начат! Нажмите кнопку для выбора победителя.";
@@ -38,9 +37,10 @@ function drawWinner() {
         return;
     }
 
-    const i = totalPrizes - prizesLeft; // Количество уже разыгранных призов
-    const rawN = (participants.length * currentPrizeNumber / totalPrizes) - i;
-    const winnerIndex = Math.ceil(rawN) - 1;
+    const totalParticipants = participants.length; // X
+    const i = prizesLeft; // Количество неразыгранных призов (i)
+    const rawN = (totalParticipants * currentPrizeNumber / totalPrizes) - i; // Формула N
+    const winnerIndex = Math.round(rawN) - 1; // Преобразуем в индекс массива
 
     // Убедимся, что индекс находится в пределах массива
     const adjustedIndex = Math.max(0, Math.min(winnerIndex, participants.length - 1));
@@ -53,7 +53,7 @@ function drawWinner() {
 
     // Обновляем оставшиеся призы
     prizesLeft -= 1; // Уменьшаем количество оставшихся призов
-    currentPrizeNumber -= 1; // Уменьшаем текущий номер приза
+    currentPrizeNumber += 1; // Увеличиваем текущий номер приза
 
     if (prizesLeft <= 0) {
         resultDiv.innerHTML += "<br><b>Призы закончились. Розыгрыш окончен.</b>";
